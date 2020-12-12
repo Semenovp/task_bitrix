@@ -1,15 +1,59 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php" );
 CModule::IncludeModule("iblock");
-
-var_dump($_POST);
-$ELEMENT_ID = $_POST['ID'];  // код элемента
-$PROPERTY_CODE = "status";  // код свойства
-$PROPERTY_VALUE = "SUCCSESS";  // значение свойства
-
-$dbr = CIBlockElement::GetList(array(), array("=ID"=>$ELEMENT_ID), false, false, array("ID", "IBLOCK_ID"));
-if ($dbr_arr = $dbr->Fetch())
-{
-    $IBLOCK_ID = $dbr_arr["IBLOCK_ID"];
-    CIBlockElement::SetPropertyValues($ELEMENT_ID, $IBLOCK_ID, $PROPERTY_VALUE, $PROPERTY_CODE);
+// Помечаем задачу выполненой
+if ($_POST['action'] == 'check') {
+    CIBlockElement::SetPropertyValuesEx($_POST['id'], false, array('status' => 6));
+        echo "success";
 }
+// Возвращаем задачу обратно в работу
+if ($_POST['action'] == 'in_work') {
+    CIBlockElement::SetPropertyValuesEx($_POST['id'], false, array('status' => 5));
+    echo "success";
+}
+// Создание новой задачи
+if($_POST['action'] == 'create') {
+    $el = new CIBlockElement;
+    $PROP = array();
+    $PROP[9] = 5;
+    $arLoadProductArray = Array(
+        "MODIFIED_BY" => $USER->GetID(),
+        "IBLOCK_SECTION_ID" => false,
+        "IBLOCK_ID" => 5,
+        "PROPERTY_VALUES" => $PROP,
+        "NAME" => $_POST['name'],
+        "ACTIVE" => "Y",            // активен
+        "PREVIEW_TEXT" => $_POST['preview_text'],
+    );
+
+    if ($PRODUCT_ID = $el->Add($arLoadProductArray))
+        echo $PRODUCT_ID;
+    else
+        echo "error";
+}
+// Удаляем задачу
+if ($_POST['action'] == 'delete') {
+    if(CIBlockElement::Delete($_POST['id'])) {
+        echo "success";
+    }
+}
+// Редактирование задачи
+if ($_POST['action'] == 'edit') {
+    $el = new CIBlockElement;
+    $arLoadProductArray = Array(
+        "MODIFIED_BY"    => $USER->GetID(),
+        "IBLOCK_SECTION" => false,
+        "NAME"           => $_POST['name'],
+        "PREVIEW_TEXT"   => $_POST['preview_text'],
+        "ACTIVE"         => "Y",
+    );
+    $PRODUCT_ID = $_POST['id'];
+    $res = $el->Update($PRODUCT_ID, $arLoadProductArray);
+    if ($res) {
+        echo "success";
+    }
+    else {
+        echo "Error: " . $el->LAST_ERROR;
+    }
+}
+?>

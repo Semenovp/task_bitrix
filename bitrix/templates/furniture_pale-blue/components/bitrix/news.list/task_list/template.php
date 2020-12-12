@@ -12,22 +12,24 @@
     </thead>
     <tbody>
     <?foreach($arResult["ITEMS"] as $arItem):?>
-<!--        <pre>-->
-<!--            --><?// var_dump($arItem); ?>
-<!--        </pre>-->
         <tr data-id="<?= $arItem['ID']; ?>">
-            <th scope="row"><?= $arItem['ID']; ?></th>
-            <td><?= $arItem['NAME']; ?></td>
-            <td><?= $arItem['PREVIEW_TEXT']; ?></td>
+            <th scope="row" class="id"><?= $arItem['ID']; ?></th>
+            <td class="name"><?= $arItem['NAME']; ?></td>
+            <td class="preview"><?= $arItem['PREVIEW_TEXT']; ?></td>
             <td><?= $arItem["TIMESTAMP_X"]; ?></td>
             <? if ($arItem["PROPERTIES"]["status"]["VALUE_XML_ID"] == "IN_WORK"): ?>
-                <td><span class="badge badge-primary">В работе</span></td>
+                <td class="status"><span class="badge badge-primary">В работе</span></td>
             <? else : ?>
-                <td><span class="badge badge-success">Завершена</span></td>
+                <td class="status"><span class="badge badge-success">Завершена</span></td>
             <? endif; ?>
             <td>
-                <a href="javascript:void(0);" class="check" data-id="<?= $arItem['ID']; ?>"><i class="fas fa-check-circle"></i></a>
-                <a href="javascript:void(0);" class="edit" data-id="<?= $arItem['ID']; ?>"><i class="fas fa-edit"></i></a>
+                <? if ($arItem["PROPERTIES"]["status"]["VALUE_XML_ID"] == "IN_WORK"): ?>
+                    <a href="javascript:void(0);" class="check" data-id="<?= $arItem['ID']; ?>"><i class="fas fa-check-circle"></i></a>
+                <? else : ?>
+                    <a href="javascript:void(0);" class="uncheck" data-id="<?= $arItem['ID']; ?>"><i class="fas fa-check-circle red"></i></a>
+                <? endif; ?>
+
+                <a href="javascript:void(0);" class="edit" data-id="<?= $arItem['ID']; ?>" data-toggle="modal" data-target="#modal_edit" data-name="<?= $arItem["NAME"]; ?>" data-preview="<?= $arItem['PREVIEW_TEXT']; ?>"><i class="fas fa-edit"></i></a>
                 <a href="javascript:void(0);" class="delete" data-id="<?= $arItem['ID']; ?>"><i class="fas fa-trash-alt"></i></a>
             </td>
         </tr>

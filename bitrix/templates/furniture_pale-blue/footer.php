@@ -2,6 +2,57 @@
 IncludeTemplateLangFile(__FILE__);
 ?>
 <!-- Modal -->
+<div class="modal fade" id="modal_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Создать задачу</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="create">
+                    <div class="form-group">
+                        <label for="name_task">Название задачи</label>
+                        <input type="text" class="form-control" id="name_task">
+                    </div>
+                    <div class="form-group">
+                        <label for="preview_text">Описание</label>
+                        <textarea class="form-control" id="preview_text" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Создать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Редактировать задачу</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit">
+                    <input type="hidden" name="id_element" id="id_element">
+                    <div class="form-group">
+                        <label for="name_task_edit">Название задачи</label>
+                        <input type="text" class="form-control" id="name_task_edit">
+                    </div>
+                    <div class="form-group">
+                        <label for="preview_text_edit">Описание</label>
+                        <textarea class="form-control" id="preview_text_edit" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Создать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal-create fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

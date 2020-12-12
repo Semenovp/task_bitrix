@@ -5,7 +5,7 @@ $APPLICATION->SetTitle("Новости");
     <div class="container">
     <div class="row header-top">
         <div class="col-12">
-            <button type="button" class="btn btn-success pull-right">Добавить задачу</button>
+            <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal_create">Добавить задачу</button>
         </div>
     </div>
     <div class="row task-body">

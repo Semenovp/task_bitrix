@@ -1,6 +1,9 @@
 td i {
 	color: #343a40;
 }
+td .uncheck i {
+	color: #a5160c;
+}
 .task-body {
 	padding: 25px 0;
 }
