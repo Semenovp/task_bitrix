@@ -1,3 +1,9 @@
 td i {
 	color: #343a40;
 }
+.task-body {
+	padding: 25px 0;
+}
+.header-top {
+	margin-top: 25px;
+}

@@ -15,7 +15,7 @@
 <!--        <pre>-->
 <!--            --><?// var_dump($arItem); ?>
 <!--        </pre>-->
-        <tr>
+        <tr data-id="<?= $arItem['ID']; ?>">
             <th scope="row"><?= $arItem['ID']; ?></th>
             <td><?= $arItem['NAME']; ?></td>
             <td><?= $arItem['PREVIEW_TEXT']; ?></td>
@@ -26,9 +26,9 @@
                 <td><span class="badge badge-success">Завершена</span></td>
             <? endif; ?>
             <td>
-                <a href=""><i class="fas fa-check-circle"></i></a>
-                <a href=""><i class="fas fa-edit"></i></a>
-                <a href=""><i class="fas fa-trash-alt"></i></a>
+                <a href="javascript:void(0);" class="check" data-id="<?= $arItem['ID']; ?>"><i class="fas fa-check-circle"></i></a>
+                <a href="javascript:void(0);" class="edit" data-id="<?= $arItem['ID']; ?>"><i class="fas fa-edit"></i></a>
+                <a href="javascript:void(0);" class="delete" data-id="<?= $arItem['ID']; ?>"><i class="fas fa-trash-alt"></i></a>
             </td>
         </tr>
     <? endforeach; ?>
