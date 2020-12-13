@@ -3,8 +3,9 @@ $(document).ready(function () {
    var dd = String(today.getDate()).padStart(2, '0');
    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
    var yyyy = today.getFullYear();
-
+   // Текущие время
    var curDate = mm + '.' + dd + '.' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() +':' + today.getSeconds();
+
    $("body").on("click", "a.check", function () {
       var postdata = {};
       postdata.id = $(this).data('id');
@@ -35,7 +36,7 @@ $(document).ready(function () {
             console.log(res);
             if (res == 'success') {
                var element = $('.task-body').find('tr[data-id="' + postdata.id +'"]');
-               element.find('.check').removeClass('uncheck').addClass('check');
+               element.find('.uncheck').removeClass('uncheck').addClass('check');
                element.find('.status .badge').removeClass('badge-success').addClass('badge-primary').text('В работе');
             }
          }

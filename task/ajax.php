@@ -3,13 +3,43 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.ph
 CModule::IncludeModule("iblock");
 // Помечаем задачу выполненой
 if ($_POST['action'] == 'check') {
-    CIBlockElement::SetPropertyValuesEx($_POST['id'], false, array('status' => 6));
+    $PROP = array();
+    $PROP[9] = 6;
+    $el = new CIBlockElement;
+    $arLoadProductArray = Array(
+        "MODIFIED_BY"    => $USER->GetID(),
+        "IBLOCK_SECTION" => false,
+        "PROPERTY_VALUES" => $PROP,
+        "ACTIVE"         => "Y",
+    );
+    $PRODUCT_ID = $_POST['id'];
+    $res = $el->Update($PRODUCT_ID, $arLoadProductArray);
+    if ($res) {
         echo "success";
+    }
+    else {
+        echo "Error: " . $el->LAST_ERROR;
+    }
 }
 // Возвращаем задачу обратно в работу
 if ($_POST['action'] == 'in_work') {
-    CIBlockElement::SetPropertyValuesEx($_POST['id'], false, array('status' => 5));
-    echo "success";
+    $PROP = array();
+    $PROP[9] = 5;
+    $el = new CIBlockElement;
+    $arLoadProductArray = Array(
+        "MODIFIED_BY"    => $USER->GetID(),
+        "IBLOCK_SECTION" => false,
+        "PROPERTY_VALUES" => $PROP,
+        "ACTIVE"         => "Y",
+    );
+    $PRODUCT_ID = $_POST['id'];
+    $res = $el->Update($PRODUCT_ID, $arLoadProductArray);
+    if ($res) {
+        echo "success";
+    }
+    else {
+        echo "Error: " . $el->LAST_ERROR;
+    }
 }
 // Создание новой задачи
 if($_POST['action'] == 'create') {

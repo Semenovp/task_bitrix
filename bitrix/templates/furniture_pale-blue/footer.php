@@ -47,7 +47,7 @@ IncludeTemplateLangFile(__FILE__);
                         <label for="preview_text_edit">Описание</label>
                         <textarea class="form-control" id="preview_text_edit" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Создать</button>
+                    <button type="submit" class="btn btn-primary">Изменить</button>
                 </form>
             </div>
         </div>
